@@ -333,23 +333,23 @@ export default function ComprobantesTable() {
                     <td className="px-4 py-3"><ComprobanteEstadoBadge estado={c.estado} /></td>
                     <td className="px-4 py-3">
                       <div className="flex items-center justify-end gap-1">
-                        <button disabled={selected.size > 0} onClick={(e) => { e.stopPropagation(); setDetailComp(c) }} className="p-1.5 text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none" aria-label="Ver detalle">
+                        <button disabled={selected.size > 1} onClick={(e) => { e.stopPropagation(); setDetailComp(c) }} className="p-1.5 text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none" aria-label="Ver detalle">
                           <Eye className="w-4 h-4" />
                         </button>
-                        <button disabled={selected.size > 0} onClick={(e) => { e.stopPropagation(); setEditComp(c) }} className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none" aria-label="Editar">
+                        <button disabled={selected.size > 1} onClick={(e) => { e.stopPropagation(); setEditComp(c) }} className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none" aria-label="Editar">
                           <Pencil className="w-4 h-4" />
                         </button>
                         {(c.estado === "pendiente" || c.estado === "vencido" || c.estado === "en_revision") && (
-                          <button disabled={selected.size > 0} onClick={(e) => { e.stopPropagation(); handleMarkPaid(c.id) }} className="p-1.5 text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none" aria-label="Marcar como pagado">
+                          <button disabled={selected.size > 1} onClick={(e) => { e.stopPropagation(); handleMarkPaid(c.id) }} className="p-1.5 text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none" aria-label="Marcar como pagado">
                             <CheckCircle className="w-4 h-4" />
                           </button>
                         )}
                         {(c.estado === "pendiente" || c.estado === "vencido" || c.estado === "en_revision") && (
-                          <button disabled={selected.size > 0} onClick={(e) => { e.stopPropagation(); handleMarkRejected(c.id) }} className="p-1.5 text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none" aria-label="Rechazar">
+                          <button disabled={selected.size > 1} onClick={(e) => { e.stopPropagation(); handleMarkRejected(c.id) }} className="p-1.5 text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none" aria-label="Rechazar">
                             <XCircle className="w-4 h-4" />
                           </button>
                         )}
-                        <button disabled={selected.size > 0} onClick={(e) => { e.stopPropagation(); setDeleteId(c.id) }} className="p-1.5 text-slate-400 hover:text-red-600 dark:hover:text-red-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none" aria-label="Eliminar">
+                        <button disabled={selected.size > 1} onClick={(e) => { e.stopPropagation(); setDeleteId(c.id) }} className="p-1.5 text-slate-400 hover:text-red-600 dark:hover:text-red-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none" aria-label="Eliminar">
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>

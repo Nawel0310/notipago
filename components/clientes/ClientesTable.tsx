@@ -253,13 +253,13 @@ export default function ClientesTable() {
                     <td className="hidden lg:table-cell px-4 py-3 text-right text-slate-400 dark:text-slate-500 text-xs">{formatDate(c.creadoEn)}</td>
                     <td className="px-4 py-3">
                       <div className="flex items-center justify-end gap-1">
-                        <button disabled={selected.size > 0} onClick={(e) => { e.stopPropagation(); setDetailCliente(c) }} className="p-1.5 text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none" aria-label="Ver detalle">
+                        <button disabled={selected.size > 1} onClick={(e) => { e.stopPropagation(); setDetailCliente(c) }} className="p-1.5 text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none" aria-label="Ver detalle">
                           <Eye className="w-4 h-4" />
                         </button>
-                        <button disabled={selected.size > 0} onClick={(e) => { e.stopPropagation(); setEditCliente(c) }} className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none" aria-label="Editar">
+                        <button disabled={selected.size > 1} onClick={(e) => { e.stopPropagation(); setEditCliente(c) }} className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none" aria-label="Editar">
                           <Pencil className="w-4 h-4" />
                         </button>
-                        <button disabled={selected.size > 0} onClick={(e) => { e.stopPropagation(); setDeleteId(c.id) }} className="p-1.5 text-slate-400 hover:text-red-600 dark:hover:text-red-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none" aria-label="Eliminar">
+                        <button disabled={selected.size > 1} onClick={(e) => { e.stopPropagation(); setDeleteId(c.id) }} className="p-1.5 text-slate-400 hover:text-red-600 dark:hover:text-red-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none" aria-label="Eliminar">
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
