@@ -328,7 +328,7 @@ export default function ComprobantesTable() {
                     </button>
                   </th>
                   <th className="px-4 py-3 text-left font-medium text-slate-600 dark:text-slate-400">Estado</th>
-                  <th className="px-4 py-3 w-10" />
+                  <th className="px-4 py-3 text-center font-medium text-slate-600 dark:text-slate-400">Acciones</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
