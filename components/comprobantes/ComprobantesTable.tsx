@@ -271,22 +271,6 @@ export default function ComprobantesTable() {
         </div>
 
         <div className="flex gap-2 ml-auto">
-          {selected.size > 0 && (
-            <>
-              <button onClick={handleBulkNotify} className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors cursor-pointer">
-                <Bell className="w-4 h-4" />
-                Notificar ({selected.size})
-              </button>
-              <button onClick={handleBulkPaid} className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 text-sm font-medium hover:bg-emerald-100 dark:hover:bg-emerald-900/30 transition-colors cursor-pointer">
-                <CheckCircle className="w-4 h-4" />
-                Pagar ({selected.size})
-              </button>
-              <button onClick={() => setBulkDeleteOpen(true)} className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 text-sm font-medium hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors cursor-pointer">
-                <Trash2 className="w-4 h-4" />
-                Eliminar ({selected.size})
-              </button>
-            </>
-          )}
           <button onClick={exportCSV} className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors cursor-pointer">
             <Download className="w-4 h-4" />
             Exportar
@@ -299,6 +283,7 @@ export default function ComprobantesTable() {
       </div>
 
       {/* Table */}
+      <div className="relative">
       <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           {filtered.length === 0 ? (
@@ -333,8 +318,8 @@ export default function ComprobantesTable() {
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
                 {paginated.map((c) => (
-                  <tr key={c.id} className="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
-                    <td className="px-4 py-3">
+                  <tr key={c.id} onClick={() => toggleSelect(c.id)} className={`cursor-pointer transition-colors ${selected.has(c.id) ? "bg-blue-50 dark:bg-blue-900/20" : "hover:bg-slate-50 dark:hover:bg-slate-700/30"}`}>
+                    <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
                       <input type="checkbox" checked={selected.has(c.id)} onChange={() => toggleSelect(c.id)} className="rounded border-slate-300 dark:border-slate-600 text-blue-600 cursor-pointer" aria-label={`Seleccionar ${c.numero}`} />
                     </td>
                     <td className="px-4 py-3">
@@ -348,23 +333,23 @@ export default function ComprobantesTable() {
                     <td className="px-4 py-3"><ComprobanteEstadoBadge estado={c.estado} /></td>
                     <td className="px-4 py-3">
                       <div className="flex items-center justify-end gap-1">
-                        <button onClick={() => setDetailComp(c)} className="p-1.5 text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer" aria-label="Ver detalle">
+                        <button disabled={selected.size > 0} onClick={(e) => { e.stopPropagation(); setDetailComp(c) }} className="p-1.5 text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none" aria-label="Ver detalle">
                           <Eye className="w-4 h-4" />
                         </button>
-                        <button onClick={() => setEditComp(c)} className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer" aria-label="Editar">
+                        <button disabled={selected.size > 0} onClick={(e) => { e.stopPropagation(); setEditComp(c) }} className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none" aria-label="Editar">
                           <Pencil className="w-4 h-4" />
                         </button>
                         {(c.estado === "pendiente" || c.estado === "vencido" || c.estado === "en_revision") && (
-                          <button onClick={() => handleMarkPaid(c.id)} className="p-1.5 text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer" aria-label="Marcar como pagado">
+                          <button disabled={selected.size > 0} onClick={(e) => { e.stopPropagation(); handleMarkPaid(c.id) }} className="p-1.5 text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none" aria-label="Marcar como pagado">
                             <CheckCircle className="w-4 h-4" />
                           </button>
                         )}
                         {(c.estado === "pendiente" || c.estado === "vencido" || c.estado === "en_revision") && (
-                          <button onClick={() => handleMarkRejected(c.id)} className="p-1.5 text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer" aria-label="Rechazar">
+                          <button disabled={selected.size > 0} onClick={(e) => { e.stopPropagation(); handleMarkRejected(c.id) }} className="p-1.5 text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none" aria-label="Rechazar">
                             <XCircle className="w-4 h-4" />
                           </button>
                         )}
-                        <button onClick={() => setDeleteId(c.id)} className="p-1.5 text-slate-400 hover:text-red-600 dark:hover:text-red-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer" aria-label="Eliminar">
+                        <button disabled={selected.size > 0} onClick={(e) => { e.stopPropagation(); setDeleteId(c.id) }} className="p-1.5 text-slate-400 hover:text-red-600 dark:hover:text-red-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none" aria-label="Eliminar">
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
@@ -379,6 +364,36 @@ export default function ComprobantesTable() {
         {filtered.length > 0 && (
           <Pagination page={page} totalPages={totalPages} onPageChange={setPage} totalItems={filtered.length} pageSize={PAGE_SIZE} />
         )}
+      </div>
+      {selected.size > 0 ? (
+        <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3 bg-white dark:bg-slate-800 rounded-full shadow-lg border border-slate-200 dark:border-slate-700 px-6 py-3 whitespace-nowrap">
+          <span className="text-sm font-semibold text-slate-600 dark:text-slate-300 pr-3 border-r border-slate-200 dark:border-slate-600">
+            {selected.size} seleccionados
+          </span>
+          <button
+            onClick={handleBulkNotify}
+            title={`Notificar ${selected.size} seleccionados`}
+            className="p-2 text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full transition-colors cursor-pointer"
+          >
+            <Bell className="w-5 h-5" />
+          </button>
+          <button
+            onClick={handleBulkPaid}
+            title={`Marcar ${selected.size} como pagados`}
+            className="p-2 text-slate-500 hover:text-emerald-600 dark:text-slate-400 dark:hover:text-emerald-400 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full transition-colors cursor-pointer"
+          >
+            <CheckCircle className="w-5 h-5" />
+          </button>
+          <div className="w-px h-5 bg-slate-200 dark:bg-slate-600" />
+          <button
+            onClick={() => setBulkDeleteOpen(true)}
+            title={`Eliminar ${selected.size} seleccionados`}
+            className="p-2 text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-full transition-colors cursor-pointer"
+          >
+            <Trash2 className="w-5 h-5" />
+          </button>
+        </div>
+      ) : null}
       </div>
 
       <ComprobanteDetailModal comprobante={detailComp} onClose={() => setDetailComp(null)} />

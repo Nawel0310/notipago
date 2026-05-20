@@ -175,24 +175,6 @@ export default function ClientesTable() {
         </select>
 
         <div className="flex gap-2 ml-auto">
-          {selected.size > 0 && (
-            <>
-              <select
-                onChange={(e) => { if (e.target.value) handleBulkStatus(e.target.value as ClienteEstado) }}
-                className="px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors cursor-pointer"
-                defaultValue=""
-              >
-                <option value="" disabled>Cambiar estado ({selected.size})</option>
-                <option value="activo">Activo</option>
-                <option value="inactivo">Inactivo</option>
-                <option value="moroso">Moroso</option>
-              </select>
-              <button onClick={() => setBulkDeleteOpen(true)} className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 text-sm font-medium hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors cursor-pointer">
-                <Trash2 className="w-4 h-4" />
-                Eliminar ({selected.size})
-              </button>
-            </>
-          )}
           <button onClick={() => setImportOpen(true)} className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors cursor-pointer">
             <Upload className="w-4 h-4" />
             Importar CSV
@@ -209,6 +191,7 @@ export default function ClientesTable() {
       </div>
 
       {/* Table */}
+      <div className="relative">
       <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           {loading ? (
@@ -252,8 +235,8 @@ export default function ClientesTable() {
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
                 {paginated.map((c) => (
-                  <tr key={c.id} className="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
-                    <td className="px-4 py-3">
+                  <tr key={c.id} onClick={() => toggleSelect(c.id)} className={`cursor-pointer transition-colors ${selected.has(c.id) ? "bg-blue-50 dark:bg-blue-900/20" : "hover:bg-slate-50 dark:hover:bg-slate-700/30"}`}>
+                    <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
                       <input type="checkbox" checked={selected.has(c.id)} onChange={() => toggleSelect(c.id)} className="rounded border-slate-300 dark:border-slate-600 text-blue-600 cursor-pointer" aria-label={`Seleccionar ${c.razonSocial}`} />
                     </td>
                     <td className="px-4 py-3">
@@ -270,13 +253,13 @@ export default function ClientesTable() {
                     <td className="hidden lg:table-cell px-4 py-3 text-right text-slate-400 dark:text-slate-500 text-xs">{formatDate(c.creadoEn)}</td>
                     <td className="px-4 py-3">
                       <div className="flex items-center justify-end gap-1">
-                        <button onClick={() => setDetailCliente(c)} className="p-1.5 text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer" aria-label="Ver detalle">
+                        <button disabled={selected.size > 0} onClick={(e) => { e.stopPropagation(); setDetailCliente(c) }} className="p-1.5 text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none" aria-label="Ver detalle">
                           <Eye className="w-4 h-4" />
                         </button>
-                        <button onClick={() => setEditCliente(c)} className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer" aria-label="Editar">
+                        <button disabled={selected.size > 0} onClick={(e) => { e.stopPropagation(); setEditCliente(c) }} className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none" aria-label="Editar">
                           <Pencil className="w-4 h-4" />
                         </button>
-                        <button onClick={() => setDeleteId(c.id)} className="p-1.5 text-slate-400 hover:text-red-600 dark:hover:text-red-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer" aria-label="Eliminar">
+                        <button disabled={selected.size > 0} onClick={(e) => { e.stopPropagation(); setDeleteId(c.id) }} className="p-1.5 text-slate-400 hover:text-red-600 dark:hover:text-red-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none" aria-label="Eliminar">
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
@@ -291,6 +274,33 @@ export default function ClientesTable() {
         {filtered.length > 0 && (
           <Pagination page={page} totalPages={totalPages} onPageChange={setPage} totalItems={filtered.length} pageSize={PAGE_SIZE} />
         )}
+      </div>
+      {selected.size > 0 ? (
+        <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3 bg-white dark:bg-slate-800 rounded-full shadow-lg border border-slate-200 dark:border-slate-700 px-6 py-3 whitespace-nowrap">
+          <span className="text-sm font-semibold text-slate-600 dark:text-slate-300 pr-3 border-r border-slate-200 dark:border-slate-600">
+            {selected.size} seleccionados
+          </span>
+          <select
+            onChange={(e) => { if (e.target.value) handleBulkStatus(e.target.value as ClienteEstado) }}
+            defaultValue=""
+            onClick={(e) => e.stopPropagation()}
+            className="text-sm text-slate-700 dark:text-slate-300 bg-transparent border-none focus:outline-none cursor-pointer"
+          >
+            <option value="" disabled>Cambiar estado</option>
+            <option value="activo">Activo</option>
+            <option value="inactivo">Inactivo</option>
+            <option value="moroso">Moroso</option>
+          </select>
+          <div className="w-px h-5 bg-slate-200 dark:bg-slate-600" />
+          <button
+            onClick={() => setBulkDeleteOpen(true)}
+            title={`Eliminar ${selected.size} seleccionados`}
+            className="p-2 text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-full transition-colors cursor-pointer"
+          >
+            <Trash2 className="w-5 h-5" />
+          </button>
+        </div>
+      ) : null}
       </div>
 
       {/* Detail Sheet */}
