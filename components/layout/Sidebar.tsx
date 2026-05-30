@@ -69,7 +69,7 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
               height={36}
               className="shrink-0 drop-shadow-sm"
             />
-            <span className="font-bold text-slate-900 dark:text-white text-[1rem] tracking-tight">
+            <span className="font-bold text-slate-900 dark:text-white text-[1.05rem] tracking-tight font-[family-name:var(--font-brand)]">
               NotiPago
             </span>
           </div>
