@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
@@ -61,11 +62,15 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-slate-100 dark:border-slate-800">
           <div className="flex items-center gap-2.5">
-            <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-blue-600">
-              <FileText className="w-4.5 h-4.5 text-white" />
-            </div>
+            <Image
+              src="/images/NOTIPAGO-LOGO.webp"
+              alt="NotiPago logo"
+              width={36}
+              height={36}
+              className="shrink-0 drop-shadow-sm"
+            />
             <span className="font-bold text-slate-900 dark:text-white text-[1rem] tracking-tight">
-              NOTIPAGO
+              NotiPago
             </span>
           </div>
           <button
