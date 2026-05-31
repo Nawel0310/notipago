@@ -265,7 +265,7 @@ export default function ComprobantesTable() {
           {state.clientes.map((c) => <option key={c.id} value={c.id}>{c.razonSocial}</option>)}
         </select>
 
-        <div className="col-span-6 grid grid-cols-1 gap-3 md:flex md:items-center md:gap-2">
+        <div className="col-span-6 grid grid-cols-2 gap-3 md:flex md:items-center md:gap-2">
           <DatePicker value={dateFrom} onChange={(v) => { setDateFrom(v); setPage(1) }} placeholder="Vencimiento desde" />
           <span className="hidden md:inline md:text-slate-400 md:text-sm">–</span>
           <DatePicker value={dateTo} onChange={(v) => { setDateTo(v); setPage(1) }} placeholder="Vencimiento hasta" />

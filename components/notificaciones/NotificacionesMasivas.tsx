@@ -96,9 +96,9 @@ export default function NotificacionesMasivas() {
             <option value="">Todos los clientes</option>
             {state.clientes.map((c) => <option key={c.id} value={c.id}>{c.razonSocial}</option>)}
           </select>
-          <DatePicker value={dateFrom} onChange={setDateFrom} placeholder="Vencimiento desde" className="col-span-2" />
+          <DatePicker value={dateFrom} onChange={setDateFrom} placeholder="Vencimiento desde" className="col-span-1" />
           <span className="hidden md:block md:self-center md:text-slate-400">–</span>
-          <DatePicker value={dateTo} onChange={setDateTo} placeholder="Vencimiento hasta" className="col-span-2" />
+          <DatePicker value={dateTo} onChange={setDateTo} placeholder="Vencimiento hasta" className="col-span-1" />
         </div>
       </div>
 
