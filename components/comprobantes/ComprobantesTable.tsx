@@ -233,8 +233,8 @@ export default function ComprobantesTable() {
       </div>
 
       {/* Filters */}
-      <div className="flex flex-wrap gap-3 mb-4">
-        <div className="relative flex-1 min-w-[200px]">
+      <div className="grid grid-cols-6 gap-3 mb-4 md:flex md:flex-wrap md:gap-3 md:mb-4">
+        <div className="relative col-span-6 md:flex-1 md:min-w-[200px]">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input
             type="search"
@@ -245,7 +245,7 @@ export default function ComprobantesTable() {
           />
         </div>
 
-        <select value={filterEstado} onChange={(e) => { setFilterEstado(e.target.value as ComprobanteEstado | ""); setPage(1) }} className="px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors cursor-pointer">
+        <select value={filterEstado} onChange={(e) => { setFilterEstado(e.target.value as ComprobanteEstado | ""); setPage(1) }} className="col-span-2 w-full md:w-auto px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors cursor-pointer">
           <option value="">Todos los estados</option>
           <option value="pendiente">Pendiente</option>
           <option value="pagado">Pagado</option>
@@ -254,28 +254,32 @@ export default function ComprobantesTable() {
           <option value="en_revision">En revisión</option>
         </select>
 
-        <select value={filterTipo} onChange={(e) => { setFilterTipo(e.target.value); setPage(1) }} className="px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors cursor-pointer">
+        <select value={filterTipo} onChange={(e) => { setFilterTipo(e.target.value); setPage(1) }} className="col-span-2 w-full md:w-auto px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors cursor-pointer">
           <option value="">Todos los tipos</option>
           {["Factura A", "Factura B", "Factura C", "Nota de Débito", "Nota de Crédito", "Recibo"].map((t) => <option key={t} value={t}>{t}</option>)}
         </select>
 
-        <select value={filterCliente} onChange={(e) => { setFilterCliente(e.target.value); setPage(1) }} className="px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors cursor-pointer max-w-[200px]">
+        <select value={filterCliente} onChange={(e) => { setFilterCliente(e.target.value); setPage(1) }} className="col-span-2 w-full md:w-auto md:max-w-[200px] px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors cursor-pointer">
           <option value="">Todos los clientes</option>
           {state.clientes.map((c) => <option key={c.id} value={c.id}>{c.razonSocial}</option>)}
         </select>
 
-        <div className="flex items-center gap-2">
-          <input type="date" value={dateFrom} onChange={(e) => { setDateFrom(e.target.value); setPage(1) }} className="px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors" title="Vencimiento desde" />
-          <span className="text-slate-400 text-sm">–</span>
-          <input type="date" value={dateTo} onChange={(e) => { setDateTo(e.target.value); setPage(1) }} className="px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors" title="Vencimiento hasta" />
+        <div className="col-span-6 grid grid-cols-2 gap-3 md:flex md:items-center md:gap-2">
+          <input type="date" value={dateFrom} onChange={(e) => { setDateFrom(e.target.value); setPage(1) }} className="w-full md:w-auto px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors" title="Vencimiento desde" />
+          <span className="hidden md:inline md:text-slate-400 md:text-sm">–</span>
+          <input type="date" value={dateTo} onChange={(e) => { setDateTo(e.target.value); setPage(1) }} className="w-full md:w-auto px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors" title="Vencimiento hasta" />
         </div>
 
-        <div className="flex gap-2 ml-auto">
-          <button onClick={exportCSV} className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors cursor-pointer">
+        <div className="col-span-6 grid grid-cols-3 gap-3 md:flex md:gap-2 md:ml-auto">
+          <button onClick={() => toast.info("Importación de CSV disponible próximamente")} className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors cursor-pointer">
+            <Upload className="w-4 h-4" />
+            Importar CSV
+          </button>
+          <button onClick={exportCSV} className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors cursor-pointer">
             <Download className="w-4 h-4" />
             Exportar
           </button>
-          <button onClick={() => setAddOpen(true)} className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors cursor-pointer">
+          <button onClick={() => setAddOpen(true)} className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors cursor-pointer">
             <Plus className="w-4 h-4" />
             Agregar Comprobante
           </button>

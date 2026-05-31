@@ -142,8 +142,8 @@ export default function ClientesTable() {
   return (
     <div>
       {/* Filters */}
-      <div className="flex flex-wrap gap-3 mb-4">
-        <div className="relative flex-1 min-w-[200px]">
+      <div className="grid grid-cols-6 gap-3 mb-4 md:flex md:flex-wrap md:gap-3 md:mb-4">
+        <div className="relative col-span-6 md:flex-1 md:min-w-[200px]">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input
             type="search"
@@ -156,7 +156,7 @@ export default function ClientesTable() {
         <select
           value={filterEstado}
           onChange={(e) => { setFilterEstado(e.target.value as ClienteEstado | ""); setPage(1) }}
-          className="px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors cursor-pointer"
+          className="col-span-3 w-full md:w-auto px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors cursor-pointer"
         >
           <option value="">Todos los estados</option>
           <option value="activo">Activo</option>
@@ -166,7 +166,7 @@ export default function ClientesTable() {
         <select
           value={filterCategoria}
           onChange={(e) => { setFilterCategoria(e.target.value as "A" | "B" | "C" | ""); setPage(1) }}
-          className="px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors cursor-pointer"
+          className="col-span-3 w-full md:w-auto px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors cursor-pointer"
         >
           <option value="">Todas las categorías</option>
           <option value="A">Categoría A</option>
@@ -174,16 +174,16 @@ export default function ClientesTable() {
           <option value="C">Categoría C</option>
         </select>
 
-        <div className="flex gap-2 ml-auto">
-          <button onClick={() => setImportOpen(true)} className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors cursor-pointer">
+        <div className="col-span-6 grid grid-cols-3 gap-3 md:flex md:gap-2 md:ml-auto">
+          <button onClick={() => setImportOpen(true)} className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors cursor-pointer">
             <Upload className="w-4 h-4" />
             Importar CSV
           </button>
-          <button onClick={exportCSV} className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors cursor-pointer">
+          <button onClick={exportCSV} className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors cursor-pointer">
             <Download className="w-4 h-4" />
             Exportar
           </button>
-          <button onClick={() => setAddOpen(true)} className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors cursor-pointer">
+          <button onClick={() => setAddOpen(true)} className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors cursor-pointer">
             <Plus className="w-4 h-4" />
             Agregar cliente
           </button>

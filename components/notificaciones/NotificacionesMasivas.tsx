@@ -85,19 +85,19 @@ export default function NotificacionesMasivas() {
       {/* Filters */}
       <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4">
         <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-3">Filtrar comprobantes</h3>
-        <div className="flex flex-wrap gap-3">
-          <select value={filterEstado} onChange={(e) => setFilterEstado(e.target.value as "pendiente" | "vencido" | "")} className="px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
+        <div className="grid grid-cols-2 gap-3 md:flex md:flex-wrap md:gap-3">
+          <select value={filterEstado} onChange={(e) => setFilterEstado(e.target.value as "pendiente" | "vencido" | "")} className="col-span-2 w-full md:w-auto px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
             <option value="">Pendientes y vencidos</option>
             <option value="pendiente">Solo pendientes</option>
             <option value="vencido">Solo vencidos</option>
           </select>
-          <select value={filterCliente} onChange={(e) => setFilterCliente(e.target.value)} className="px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer max-w-[220px]">
+          <select value={filterCliente} onChange={(e) => setFilterCliente(e.target.value)} className="col-span-2 w-full md:w-auto md:max-w-[220px] px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
             <option value="">Todos los clientes</option>
             {state.clientes.map((c) => <option key={c.id} value={c.id}>{c.razonSocial}</option>)}
           </select>
-          <input type="date" value={dateFrom} onChange={(e) => setDateFrom(e.target.value)} className="px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" title="Vencimiento desde" />
-          <span className="self-center text-slate-400">–</span>
-          <input type="date" value={dateTo} onChange={(e) => setDateTo(e.target.value)} className="px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" title="Vencimiento hasta" />
+          <input type="date" value={dateFrom} onChange={(e) => setDateFrom(e.target.value)} className="col-span-1 w-full md:w-auto px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" title="Vencimiento desde" />
+          <span className="hidden md:block md:self-center md:text-slate-400">–</span>
+          <input type="date" value={dateTo} onChange={(e) => setDateTo(e.target.value)} className="col-span-1 w-full md:w-auto px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" title="Vencimiento hasta" />
         </div>
       </div>
 
