@@ -264,7 +264,7 @@ export default function ComprobantesTable() {
           {state.clientes.map((c) => <option key={c.id} value={c.id}>{c.razonSocial}</option>)}
         </select>
 
-        <div className="col-span-6 grid grid-cols-2 gap-3 md:flex md:items-center md:gap-2">
+        <div className="col-span-6 grid grid-cols-1 gap-3 md:flex md:items-center md:gap-2">
           <input type="date" value={dateFrom} onChange={(e) => { setDateFrom(e.target.value); setPage(1) }} className="w-full md:w-auto px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors" title="Vencimiento desde" />
           <span className="hidden md:inline md:text-slate-400 md:text-sm">–</span>
           <input type="date" value={dateTo} onChange={(e) => { setDateTo(e.target.value); setPage(1) }} className="w-full md:w-auto px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors" title="Vencimiento hasta" />

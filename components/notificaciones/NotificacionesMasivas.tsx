@@ -95,9 +95,9 @@ export default function NotificacionesMasivas() {
             <option value="">Todos los clientes</option>
             {state.clientes.map((c) => <option key={c.id} value={c.id}>{c.razonSocial}</option>)}
           </select>
-          <input type="date" value={dateFrom} onChange={(e) => setDateFrom(e.target.value)} className="col-span-1 w-full md:w-auto px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" title="Vencimiento desde" />
+          <input type="date" value={dateFrom} onChange={(e) => setDateFrom(e.target.value)} className="col-span-2 w-full md:w-auto px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" title="Vencimiento desde" />
           <span className="hidden md:block md:self-center md:text-slate-400">–</span>
-          <input type="date" value={dateTo} onChange={(e) => setDateTo(e.target.value)} className="col-span-1 w-full md:w-auto px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" title="Vencimiento hasta" />
+          <input type="date" value={dateTo} onChange={(e) => setDateTo(e.target.value)} className="col-span-2 w-full md:w-auto px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" title="Vencimiento hasta" />
         </div>
       </div>
 
