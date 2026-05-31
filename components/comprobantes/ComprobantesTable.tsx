@@ -16,6 +16,7 @@ import Pagination from "@/components/shared/Pagination"
 import ConfirmModal from "@/components/shared/ConfirmModal"
 import ComprobanteModal from "./ComprobanteModal"
 import ComprobanteDetailModal from "./ComprobanteDetailModal"
+import { DatePicker } from "@/components/ui/date-picker"
 import type { Comprobante, ComprobanteEstado } from "@/lib/types"
 import type { ComprobanteFormData } from "@/lib/schemas"
 
@@ -265,9 +266,9 @@ export default function ComprobantesTable() {
         </select>
 
         <div className="col-span-6 grid grid-cols-1 gap-3 md:flex md:items-center md:gap-2">
-          <input type="date" value={dateFrom} onChange={(e) => { setDateFrom(e.target.value); setPage(1) }} className="w-full md:w-auto px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors" title="Vencimiento desde" />
+          <DatePicker value={dateFrom} onChange={(v) => { setDateFrom(v); setPage(1) }} placeholder="Vencimiento desde" />
           <span className="hidden md:inline md:text-slate-400 md:text-sm">–</span>
-          <input type="date" value={dateTo} onChange={(e) => { setDateTo(e.target.value); setPage(1) }} className="w-full md:w-auto px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors" title="Vencimiento hasta" />
+          <DatePicker value={dateTo} onChange={(v) => { setDateTo(v); setPage(1) }} placeholder="Vencimiento hasta" />
         </div>
 
         <div className="col-span-6 grid grid-cols-3 gap-3 md:flex md:gap-2 md:ml-auto">
